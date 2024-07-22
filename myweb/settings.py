@@ -120,11 +120,12 @@ STATIC_URL = "static/"
 
 # 确保你的 STATICFILES_DIRS 包含你项目的静态文件目录
 STATICFILES_DIRS = [
-    BASE_DIR / "staticfiles",
+    BASE_DIR / "migrate/static",
 ]
 
 # 设置 STATIC_ROOT 路径，确保它是一个不同于 STATICFILES_DIRS 的目录
 STATIC_ROOT = BASE_DIR / "staticfiles_collected"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
