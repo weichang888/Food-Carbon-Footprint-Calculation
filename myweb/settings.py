@@ -119,8 +119,10 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 # 确保你的 STATICFILES_DIRS 包含你项目的静态文件目录
+#STATICFILES_DIRS = [BASE_DIR / "migrate/static",]
+
 STATICFILES_DIRS = [
-    BASE_DIR / "migrate/static",
+    BASE_DIR / "myweb/static",
 ]
 
 # 添加以下行，设置 STATIC_ROOT
