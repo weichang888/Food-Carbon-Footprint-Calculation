@@ -122,7 +122,7 @@ STATIC_URL = "static/"
 #STATICFILES_DIRS = [BASE_DIR / "migrate/static",]
 
 STATICFILES_DIRS = [
-    BASE_DIR / "myweb/staticfiles",
+    BASE_DIR / "staticfiles",
 ]
 
 # 添加以下行，设置 STATIC_ROOT
