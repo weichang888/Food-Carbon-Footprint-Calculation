@@ -15,11 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include  # 引入 include
-
+from django.urls import path, include
+from django.http import HttpResponseRedirect
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("migrate/", include('migrate.urls')),  # 包含 migrate 应用的 URLs
+    path('admin/', admin.site.urls),
+    path('migrate/', include('migrate.urls')),
+    path('', lambda request: HttpResponseRedirect('migrate/search/')),  # 默認重定向到/migrate/search/
 ]
 
