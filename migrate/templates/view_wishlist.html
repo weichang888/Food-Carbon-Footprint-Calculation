@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>願望清單</h1>
+<div class="wishlist-grid">
+    {% for item in wishlist_items %}
+        <div class="wishlist-card">
+            <p>{{ item.name }}</p>
+        </div>
+    {% endfor %}
+</div>
+<a href="{% url 'search_food' %}">返回搜索頁面</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>搜索结果</h1>
+{% if error %}
+    <p>{{ error }}</p>
+    <form method="post" action="{% url 'add_to_wishlist' %}">
+        {% csrf_token %}
+        <input type="hidden" name="name" value="{{ wishlist_form.name.value }}">
+        <button type="submit">加入願望清單</button>
+    </form>
+    <a href="{% url 'search_food' %}">返回搜索頁</a>
+{% else %}
+    <ul>
+        {% for food in foods %}
+        <li>
+            {{ food.name }} ({{ food.unit }})
+            <form method="post" action="{% url 'addfood' food.id %}">
+                {% csrf_token %}
+                <input type="number" name="quantity" step="0.01" placeholder="Enter quantity">
+                <button type="submit">添加到列表</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

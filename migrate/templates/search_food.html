@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>搜尋食品</title>
+</head>
+<body>
+    <h1>搜尋食品</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">搜尋</button>
+    </form>
+</body>
+</html>
+{% endblock %}
