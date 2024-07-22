@@ -123,6 +123,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "migrate/static",
 ]
 
+# 添加以下行，设置 STATIC_ROOT
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
