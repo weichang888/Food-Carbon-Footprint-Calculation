@@ -3,7 +3,7 @@ from .models import Food, WishList
 from .forms import FoodSearchForm, WishListForm
 from django.core.paginator import Paginator
 
-# 搜索食物并显示结果
+# 搜索食物並顯示結果
 def search_food(request):
     if request.method == 'POST':
         form = FoodSearchForm(request.POST)
@@ -17,8 +17,8 @@ def search_food(request):
         form = FoodSearchForm()
     return render(request, 'search_food.html', {'form': form})
 
-# 将食物及其数量添加到会话中
-# 将食物及其数量添加到会话中
+# 將食物、數量添加到視窗中
+
 def addfood(request, food_id):
     if food_id == 0:
         return redirect('search_food')
@@ -26,6 +26,13 @@ def addfood(request, food_id):
         quantity = request.POST.get('quantity', 0)
         try:
             quantity = float(quantity)
+
+            if quantity <= 0:
+                return render(request, 'search_results.html', {
+                    'error': "數量必須為正",
+                    'foods': Food.objects.filter(pk=food_id)
+                })
+
             food = get_object_or_404(Food, pk=food_id)
             if 'food_list' not in request.session:
                 request.session['food_list'] = []
@@ -70,7 +77,7 @@ def add_to_wishlist(request):
 # 列出所有已有的食物
 def food_list(request):
     foods = Food.objects.all()
-    paginator = Paginator(foods, 20)  # 每页显示20个项目
+    paginator = Paginator(foods, 20)  # 每頁顯示20個項目
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'food_list.html', {'page_obj': page_obj})

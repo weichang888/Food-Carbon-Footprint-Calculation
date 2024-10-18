@@ -18,7 +18,7 @@
             {{ food.name }} ({{ food.unit }})
             <form method="post" action="{% url 'addfood' food.id %}">
                 {% csrf_token %}
-                <input type="number" name="quantity" step="0.01" placeholder="Enter quantity">
+                <input type="number" name="quantity" step="0.01" min="0" placeholder="Enter quantity" required>
                 <button type="submit">添加到列表</button>
             </form>
         </li>
