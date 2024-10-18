@@ -82,13 +82,27 @@ def food_list(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'food_list.html', {'page_obj': page_obj})
 
-# 显示当前总碳足迹
+# 顯示當前總碳足跡
 def total_carbon(request):
     food_list = request.session.get('food_list', [])
     total_carbon = sum(item['total_carbon'] for item in food_list)
-    exceed_limit = total_carbon > 5
+
+    # 根據不同的碳排放量範圍設置對應訊息
+    exceed_limit = None
+    exceed_image = None
+    if total_carbon > 19.6:
+        exceed_limit = "已超過台灣每人每日碳排放量19.6kg CO2e"
+        exceed_image = "images/taiwan_exceed.png"
+    elif total_carbon > 5:
+        exceed_limit = "已超過聯合國建議每人每日碳排放量5kg CO2e"
+        exceed_image = "images/exceed.png"
+    elif total_carbon > 0:
+        exceed_limit = "符合聯合國推薦標準"
+        exceed_image = "images/meet.png"
+
     return render(request, 'total_carbon.html', {
         'food_list': food_list,
         'total_carbon': total_carbon,
-        'exceed_limit': exceed_limit
+        'exceed_limit': exceed_limit,
+        'exceed_image': exceed_image
     })

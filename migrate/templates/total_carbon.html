@@ -8,16 +8,25 @@
     <li>{{ food.name }} - {{ food.quantity }} {{ food.unit }} - 總碳足跡 {{ food.total_carbon }} kg CO2e</li>
     {% endfor %}
 </ul>
-<p>總碳足跡: {{ total_carbon }} kg CO2e</p>
-{% if exceed_limit %}
-    <p style="color: red;">*已超過聯合國建議每人每日碳排放量5kg CO2e</p>
-    <img src="{% static 'images/exceed.png' %}" alt="Exceed Limit">
-{% else %}
-    <p style="color: green;">*符合聯合國推薦標準</p>
-    <img src="{% static 'images/meet.png' %}" alt="Meet Standard">
+
+{% if total_carbon > 0 %}
+    <p>總碳足跡: {{ total_carbon }} kg CO2e</p>
+
+    {% if exceed_limit %}
+        <p style="color: red;">*已超過聯合國建議每人每日碳排放量5kg CO2e</p>
+        <img src="{% static 'images/Exceed.jpg' %}" alt="Exceed Limit">
+    {% elif total_carbon > 19.6 %}
+        <p style="color: red;">*已超過台灣每人每日的碳排放量19.6公斤</p>
+        <img src="{% static 'images/tw_limit.png' %}" alt="Taiwan Limit">
+    {% else %}
+        <p style="color: green;">*符合聯合國推薦標準</p>
+        <img src="{% static 'images/Meet.jpg' %}" alt="Meet Standard">
+    {% endif %}
 {% endif %}
+
 <div class="actions">
     <a href="{% url 'search_food' %}" class="btn btn-primary">增加其他食品</a>
     <a href="{% url 'clear_food_list' %}" class="btn btn-danger">清空列表</a>
 </div>
 {% endblock %}
+
